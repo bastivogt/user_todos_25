@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block site_title %}{{ title }}{% endblock %}
+
+{% block title %}
+    <h1 class="text-3xl text-cyan-500">{{ object.name }}</h1>
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    <a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <a href="{% url "todo_app:category_index" %}">Back to Categories</a>
+    </div>
+
+{% endblock %}

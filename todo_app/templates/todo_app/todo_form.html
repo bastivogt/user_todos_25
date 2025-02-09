@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block site_title %}{{ title }}{% trans "New Todo" %}{% endblock %}
+
+{% block title %}
+    <h1 class="text-3xl text-cyan-500">{% trans "New Todo" %}</h1>
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <form  method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button>{% trans "Submit" %}</button>
+        </form>
+    </div>
+    <div>
+        <a href="{% url "todo_app:todo_index" %}">Back to Categories</a>
+    </div>
+
+{% endblock %}

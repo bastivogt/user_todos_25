@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block site_title %}{{ title }}{% endblock %}
+
+{% block title %}
+    <h1 class="text-3xl text-cyan-500">{{ title }}</h1>
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <a href="{% url "todo_app:category_create" %}">{% trans "New Category" %}</a>
+    </div>
+    <div>
+        <ul>
+            {% for category in category_list %}
+                <li>
+                    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+                    <a href="{% url "todo_app:category_update" pk=category.pk %}">[{% trans "Update" %}]</a>
+                    <a href="{% url "todo_app:category_delete" pk=category.pk %}">[{% trans "Delete" %}]</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <a href="{% url "todo_app:todo_index" %}">{% trans "All Todos" %}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block site_title %}{{ title }}{% trans "Delete Category" %}{% endblock %}
+
+{% block title %}
+    <h1>{% trans "Delete Category" %}</h1>
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <form  method="post">
+            {% csrf_token %}
+            <p>{% trans "Do you really want to delete: " %}<b>{{ object }}</b>?</p>
+            <button>{% trans "Delete" %}</button>
+        </form>
+    </div>
+    <div>
+        <a href="{% url "todo_app:category_index" %}">{% trans "Back to Categories" %}</a>
+    </div>
+
+{% endblock %}
