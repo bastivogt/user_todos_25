@@ -35,7 +35,7 @@ class Category(models.Model):
 
 class Todo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User")
-    title = models.CharField(max_length=150, unique=True, verbose_name="title")
+    title = models.CharField(max_length=150, verbose_name="title")
     content = models.TextField(verbose_name="Content")
     categories = models.ManyToManyField(Category, blank=True, related_name="todos", verbose_name="Categories")
     done = models.BooleanField(default=False, verbose_name="Done")
