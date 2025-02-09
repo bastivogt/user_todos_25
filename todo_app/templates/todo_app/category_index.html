@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block site_title %}{{ title }}{% endblock %}
+
 
 {% block title %}
-    <h1 class="text-3xl text-cyan-500">{{ title }}</h1>
+    {{ title }}
 {% endblock %}
 
 
 {% block content %}
+    <h1>{% trans "Categories" %}</h1>
     <div>
         <a href="{% url "todo_app:category_create" %}">{% trans "New Category" %}</a>
     </div>
     <div>
+        {% if category_list %}
         <ul>
             {% for category in category_list %}
                 <li>
@@ -22,6 +24,9 @@
                 </li>
             {% endfor %}
         </ul>
+        {% else %}
+            <p>{% trans "No Categories available." %}</p>
+        {% endif %}
     </div>
     <div>
         <a href="{% url "todo_app:todo_index" %}">{% trans "All Todos" %}</a>

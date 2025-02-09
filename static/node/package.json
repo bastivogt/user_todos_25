@@ -1,0 +1,21 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass:build": "sass bootstrap/scss:bootstrap/css --no-source-map",
+    "sass:watch": "sass bootstrap/scss:bootstrap/css --no-source-map --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "sass": "^1.84.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

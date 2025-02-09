@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="{% static "node/bootstrap/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 
-    <title>Todo App - {% block site_title %}{% endblock %}</title>
+    <title>Todo App - {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <header>
-        {% block title %}{% endblock %}
-    </header>
 
     <main>
         {% block content %}{% endblock %}
