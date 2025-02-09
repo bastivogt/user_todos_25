@@ -25,5 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/", include("sevo_user.urls")),
     path("", RedirectView.as_view(pattern_name="todo_app:todo_index"), name="index"),
-    path("todos/", include("todo_app.urls")),
+    path("app-todos/", include("todo_app.urls")),
 ]

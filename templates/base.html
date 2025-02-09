@@ -11,11 +11,13 @@
     <title>Todo App - {% block title %}{% endblock %}</title>
 </head>
 <body>
+    {% include "./partials/_nav.html" %}
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
+    <script src="{% static "node/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
     <script src="{% static "js/app.js" %}"></script>
 </body>
 </html>

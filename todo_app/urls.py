@@ -5,11 +5,11 @@ from . import views
 app_name = "todo_app"
 urlpatterns = [
     #path("", views.index, name="index")
-    path("", views.TodoListView.as_view(), name="todo_index"),
-    path("detail/<int:pk>/", views.TodoDetailView.as_view(), name="todo_detail"),
-    path("create/", views.TodoCreateView.as_view(), name="todo_create"),
-    path("update/<int:pk>/", views.TodoUpdateView.as_view(), name="todo_update"),
-    path("delete/<int:pk>/", views.TodoDeleteView.as_view(), name="todo_delete"),
+    path("todos/", views.TodoListView.as_view(), name="todo_index"),
+    path("todo/detail/<int:pk>/", views.TodoDetailView.as_view(), name="todo_detail"),
+    path("todo/create/", views.TodoCreateView.as_view(), name="todo_create"),
+    path("todo/update/<int:pk>/", views.TodoUpdateView.as_view(), name="todo_update"),
+    path("todo/delete/<int:pk>/", views.TodoDeleteView.as_view(), name="todo_delete"),
 
     path("categories/", views.CategoryListView.as_view(), name="category_index"),
     
