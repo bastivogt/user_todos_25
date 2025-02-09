@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.utils.translation import gettext as _
 from django.http import Http404
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Todo, Category
 from .forms import CategoryForm, TodoForm
@@ -14,9 +15,10 @@ from .forms import CategoryForm, TodoForm
 
 # Category
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "todo_app/category_index.html"
+    login_url = reverse_lazy("sevo_user:sign_in")
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -31,8 +33,9 @@ class CategoryListView(ListView):
         return ctx
     
 
-class CategoryDetailView(DetailView):
+class CategoryDetailView(LoginRequiredMixin, DetailView):
     model = Category
+    login_url = reverse_lazy("sevo_user:sign_in")
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
@@ -46,10 +49,11 @@ class CategoryDetailView(DetailView):
         })
         return ctx
     
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy("todo_app:category_index")
+    login_url = reverse_lazy("sevo_user:sign_in")
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)
@@ -61,10 +65,11 @@ class CategoryCreateView(CreateView):
         })
         return initial
     
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy("todo_app:category_index")
+    login_url = reverse_lazy("sevo_user:sign_in")
 
 
     def get_context_data(self, **kwargs):
@@ -79,19 +84,21 @@ class CategoryUpdateView(UpdateView):
 
 
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = "todo_app/category_confirm_delete.html"
     success_url = reverse_lazy("todo_app:category_index")
+    login_url = reverse_lazy("sevo_user:sign_in")
 
 
     
 
 # Todo
 
-class TodoListView(ListView):
+class TodoListView(LoginRequiredMixin, ListView):
     template_name = "todo_app/todo_index.html" # default todo_app/todo_list.html
     model = Todo
+    login_url = reverse_lazy("sevo_user:sign_in")
     
 
     def get_queryset(self):
@@ -107,18 +114,20 @@ class TodoListView(ListView):
     
 
 
-class TodoDetailView(DetailView):
+class TodoDetailView(LoginRequiredMixin, DetailView):
     model = Todo
     template_name = "todo_app/todo_detail.html"
+    login_url = reverse_lazy("sevo_user:sign_in")
     
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset().filter(user=self.request.user)
     
 
-class TodoCreateView(CreateView):
+class TodoCreateView(LoginRequiredMixin, CreateView):
     model = Todo
     form_class = TodoForm
     success_url = reverse_lazy("todo_app:todo_index")
+    login_url = reverse_lazy("sevo_user:sign_in")
 
     def get_initial(self):
         initial = super().get_initial()
@@ -135,7 +144,7 @@ class TodoCreateView(CreateView):
     
 
 
-class TodoUpdateView(UpdateView):
+class TodoUpdateView(LoginRequiredMixin, UpdateView):
     model = Todo
     form_class = TodoForm
     success_url = reverse_lazy("todo_app:todo_index")
@@ -143,8 +152,7 @@ class TodoUpdateView(UpdateView):
     def get_initial(self):
         initial = super().get_initial()
         initial.update({
-            "user": self.request.user,
-            #"categories": Category.objects.all().filter(user=self.request.user)
+            "user": self.request.user
         })
         return initial
     
@@ -154,10 +162,11 @@ class TodoUpdateView(UpdateView):
         return fk
     
 
-class TodoDeleteView(DeleteView):
+class TodoDeleteView(LoginRequiredMixin, DeleteView):
     model = Todo
     template_name = "todo_app/todo_confirm_delete.html"
     success_url = reverse_lazy("todo_app:todo_index")
+    login_url = reverse_lazy("sevo_user:sign_in")
 
 
     
