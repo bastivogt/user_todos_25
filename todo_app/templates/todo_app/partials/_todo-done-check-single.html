@@ -8,7 +8,7 @@
         name="done"
         {% if todo.done %} checked{% endif %}
 
-        hx-post="{% url "todo_app:todo_switch_done_list" pk=todo.pk %}"
-        hx-target="#todo-list"
+        hx-post="{% url "todo_app:todo_switch_done_single" pk=todo.pk %}"
+        hx-target="#todo-single"
     >
 </div>

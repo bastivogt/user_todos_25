@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .models import Todo, Category
 from .forms import CategoryForm, TodoForm
@@ -170,6 +171,7 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
 
 
 
+@login_required(login_url="sevo_user:sign_in")
 def todo_switch_done_list(request, pk):
     if request.method == "POST":
         todo = get_object_or_404(Todo, pk=pk)
@@ -180,12 +182,13 @@ def todo_switch_done_list(request, pk):
     })
 
 
+@login_required(login_url="sevo_user:sign_in")
 def todo_switch_done_single(request, pk):
     if request.method == "POST":
         todo = get_object_or_404(Todo, pk=pk)
         todo.done = not todo.done
         todo.save()
-    return render(request, "todo_app/partials/_todo-item.html", {
+    return render(request, "todo_app/partials/_todo-item-detail.html", {
         "todo": todo
     })
 

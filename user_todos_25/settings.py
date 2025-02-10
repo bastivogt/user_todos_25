@@ -129,3 +129,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# SEVO USER
+SEVO_USER_SIGN_IN_REDIRECT_URL = "todo_app:todo_index"

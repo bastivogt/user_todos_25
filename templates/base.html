@@ -19,6 +19,12 @@
     </main>
 
     <script src="{% static "node/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <script src={% static "js/htmx.min.js" %}></script>
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
     {% block extern_js %}{% endblock %}
     <script src="{% static "js/app.js" %}"></script>
 </body>
