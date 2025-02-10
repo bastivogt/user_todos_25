@@ -7,34 +7,14 @@
     {{ title }}
 {% endblock %}
 
+{% block header %}
+    {% include "./partials/_heading.html" with title=title %}
+{% endblock %}
+
 
 {% block content %}
-<h1>Todos</h1>
-<div>
-    <a href="{% url "todo_app:todo_create" %}">{% trans "Create Todo" %}</a>
-    <a href="{% url "todo_app:category_index" %}">{% trans "Categories" %}</a>
-</div>
-    <div>
-        
-        {% if todo_list %}
-        <ul>
-            {% for todo in todo_list %}
-                <li>
-                    <a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a>
-                    <a href="{% url "todo_app:todo_update" pk=todo.pk %}">[{% trans "Update" %}]</a>
-                    <a href="{% url "todo_app:todo_delete" pk=todo.pk %}">[{% trans "Delete" %}]</a>
-                    <span>[{% if todo.done %}DONE{% else %}NOT DONE{% endif %}]</span>
-                </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>{% trans "No Todos available." %}</p>
-        {% endif %}
-    </div>
-    <hr>
     <div id="todo-list">
         {% include "./partials/_todo-list.html" %}
     </div>
-
 {% endblock %}
 
