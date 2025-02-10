@@ -1,0 +1,14 @@
+{% load i18n %}
+<div class="form-check form-switchss">
+    <label class="form-check-label" for="{{ todo.title }}-{{ todo.pk }}">{% trans "Done" %}</label>
+    <input class="form-check-input" 
+        type="checkbox" 
+        role="switch" 
+        id="{{ todo.title }}-{{ todo.pk }}" 
+        name="done"
+        {% if todo.done %} checked{% endif %}
+
+        hx-post="{% url "todo_app:todo_switch_done_list" pk=todo.pk %}"
+        hx-target="#todo-list"
+    >
+</div>

@@ -11,6 +11,8 @@ urlpatterns = [
     path("todo/update/<int:pk>/", views.TodoUpdateView.as_view(), name="todo_update"),
     path("todo/delete/<int:pk>/", views.TodoDeleteView.as_view(), name="todo_delete"),
 
+    path("todo/switch/done/<int:pk>/", views.todo_switch_done_list, name="todo_switch_done_list"),
+
     path("categories/", views.CategoryListView.as_view(), name="category_index"),
     
     path("category/<int:pk>/", views.CategoryDetailView.as_view(), name="category_detail"),

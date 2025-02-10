@@ -40,5 +40,10 @@
     <div>
         <a href="{% url "todo_app:todo_index" %}">{% trans "Back to Todos" %}</a>
     </div>
+    <hr>
+    <div id="todo-single">
+        {% include "./partials/_todo-item" with hx_target="#todo-single" %}
+    </div>
+
 
 {% endblock %}

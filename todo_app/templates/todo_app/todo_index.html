@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 
 
@@ -31,4 +31,18 @@
             <p>{% trans "No Todos available." %}</p>
         {% endif %}
     </div>
+    <hr>
+    <div id="todo-list">
+        {% include "./partials/_todo-list.html" %}
+    </div>
+
+{% endblock %}
+
+{% block extern_js %}
+    <script src={% static "js/htmx.min.js" %}></script>
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
 {% endblock %}

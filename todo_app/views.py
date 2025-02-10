@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 # from django.views.generic.list import ListView
 # from django.views.generic.detail import DetailView
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView
 from django.utils.translation import gettext as _
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -167,6 +167,32 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "todo_app/todo_confirm_delete.html"
     success_url = reverse_lazy("todo_app:todo_index")
     login_url = reverse_lazy("sevo_user:sign_in")
+
+
+
+def todo_switch_done_list(request, pk):
+    if request.method == "POST":
+        todo = get_object_or_404(Todo, pk=pk)
+        todo.done = not todo.done
+        todo.save()
+    return render(request, "todo_app/partials/_todo-list.html", {
+        "todo_list": Todo.objects.filter(user=request.user)
+    })
+
+
+def todo_switch_done_single(request, pk):
+    if request.method == "POST":
+        todo = get_object_or_404(Todo, pk=pk)
+        todo.done = not todo.done
+        todo.save()
+    return render(request, "todo_app/partials/_todo-item.html", {
+        "todo": todo
+    })
+
+    
+
+    
+    
 
 
     
