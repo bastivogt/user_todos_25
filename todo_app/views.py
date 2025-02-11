@@ -46,6 +46,7 @@ class CategoryDetailView(LoginRequiredMixin, DetailView):
         todos = self.get_object().todos.all().filter(user=self.request.user)
         # print(todos)
         ctx.update({
+            "title": self.get_object().name,
             "todos": todos
         })
         return ctx
@@ -71,6 +72,14 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         self.form_object.save()
         return super().form_valid(form)
     
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            "title": _("New Category"),
+            "meta_data": False
+        })
+        return ctx
+    
 class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryForm
@@ -87,6 +96,14 @@ class CategoryUpdateView(LoginRequiredMixin, UpdateView):
             "user": self.request.user
         })
         return initial
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            "title": self.get_object().name, 
+            "meta_data": True
+        })
+        return ctx
 
 
 
@@ -114,7 +131,8 @@ class TodoListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx.update({
-            "title": _("All Todos")
+            "title": _("All Todos"),
+            "meta_data": False
         })
         return ctx
     
@@ -132,7 +150,8 @@ class TodoDetailView(LoginRequiredMixin, DetailView):
         ctx = super().get_context_data(**kwargs)
         print(self.get_object().title)
         ctx.update({
-            "title": self.get_object().title
+            "title": self.get_object().title,
+            "meta_data": True
         })
         return ctx
     
@@ -165,7 +184,8 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx.update({
-            "title": _("New Todo")
+            "title": _("New Todo"),
+            "meta_data": False
         })
         return ctx
     
@@ -194,7 +214,8 @@ class TodoUpdateView(LoginRequiredMixin, UpdateView):
         ctx = super().get_context_data(**kwargs)
         print(self.get_object().title)
         ctx.update({
-            "title": self.get_object().title
+            "title": self.get_object().title,
+            "meta_data": True
         })
         return ctx
     

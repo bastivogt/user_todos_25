@@ -22,16 +22,17 @@
         <div class="card">
             <div class="card-header">
                 {{ title }}
-
-                <div class="meta-data">
-                    <small>
-                        <time datetime="{{ todo.created }}">{{ todo.created }}</time>
-                    </small>
-                    <br>
-                    <small>
-                        <time datetime="{{ todo.updated }}">{{ todo.updated }}</time>
-                    </small>
-                </div>  
+                {% if meta_data %}
+                    <div class="meta-data">
+                        <small>
+                            {% trans "Created" %}: <time datetime="{{ todo.created }}">{{ todo.created }}</time>
+                        </small>
+                        <br>
+                        <small>
+                            {% trans "Updated" %}: <time datetime="{{ todo.updated }}">{{ todo.updated }}</time>
+                        </small>
+                    </div>  
+                {% endif %}
             </div>
             <div class="card-body">
                 {% for field in form %}

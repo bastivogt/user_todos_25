@@ -12,6 +12,10 @@ class CategoryForm(forms.ModelForm):
             "user"
         ]
 
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"})
+        }
+
 
 
 

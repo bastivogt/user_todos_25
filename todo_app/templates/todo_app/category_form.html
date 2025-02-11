@@ -1,23 +1,69 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block extern_css %}
+{{ form.media }}
+{% endblock %}
 
 
 {% block title %}
-    {% trans "Category Form" %}
+    {{ title }}
+{% endblock %}
+
+{% block header %}
+    {% include "./partials/_heading.html" with title=title %}
 {% endblock %}
 
 
 {% block content %}
-    <div>
-        <form  method="post">
-            {% csrf_token %}
-            {{ form }}
-            <button>{% trans "Submit" %}</button>
-        </form>
+
+    <form  method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                {{ title }}
+                {% if meta_data %}
+                    <div class="meta-data">
+                        <small>
+                            {% trans "Created" %}: <time datetime="{{ category.created }}">{{ category.created }}</time>
+                        </small>
+                        <br>
+                        <small>
+                            {% trans "Updated" %}: <time datetime="{{ category.updated }}">{{ category.updated }}</time>
+                        </small>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {% if field.field.required %}
+                            <span class="text-danger">*</span>
+                        {% endif %}
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">{% trans "Submit" %}</button>
+            </div>
+        </div>
+
+    </form>
+    <div class="mt-5">
+        {% include "./partials/_category-back.html" %}
     </div>
-    <div>
-        <a href="{% url "todo_app:category_index" %}">{% trans "Back to Categories" %}</a>
-    </div>
+
+
+
+    
 
 {% endblock %}
