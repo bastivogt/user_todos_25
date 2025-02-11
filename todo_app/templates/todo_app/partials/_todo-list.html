@@ -2,7 +2,7 @@
 
 {% if todo_list %}
     {% for todo in todo_list %}
-        {% include "./_todo-item.html" with list=True detail=True update=True delete=True done=True %}
+        {% include "./_todo-item-list.html" with list=True detail=True update=True delete=True done=True %}
     {% endfor %}
 {% else %}
     <p>{% trans "No Todos available." %}</p>

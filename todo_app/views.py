@@ -56,8 +56,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("todo_app:category_index")
     login_url = reverse_lazy("sevo_user:sign_in")
 
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+
     
     def get_initial(self):
         initial = super().get_initial()
@@ -65,6 +64,12 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
             "user": self.request.user
         })
         return initial
+    
+    def form_valid(self, form):
+        self.form_object = form.save(commit=False)
+        self.form_object.user = self.request.user
+        self.form_object.save()
+        return super().form_valid(form)
     
 class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
@@ -123,6 +128,14 @@ class TodoDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset().filter(user=self.request.user)
     
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        print(self.get_object().title)
+        ctx.update({
+            "title": self.get_object().title
+        })
+        return ctx
+    
 
 class TodoCreateView(LoginRequiredMixin, CreateView):
     model = Todo
@@ -143,6 +156,21 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
         fk["user"] = self.request.user
         return fk
     
+    def form_valid(self, form):
+        self.form_object = form.save(commit=False)
+        self.form_object.user = self.request.user
+        self.form_object.save()
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            "title": _("New Todo")
+        })
+        return ctx
+    
+
+    
 
 
 class TodoUpdateView(LoginRequiredMixin, UpdateView):
@@ -161,6 +189,15 @@ class TodoUpdateView(LoginRequiredMixin, UpdateView):
         fk = super().get_form_kwargs()
         fk["user"] = self.request.user
         return fk
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        print(self.get_object().title)
+        ctx.update({
+            "title": self.get_object().title
+        })
+        return ctx
+    
     
 
 class TodoDeleteView(LoginRequiredMixin, DeleteView):

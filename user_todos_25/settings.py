@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "tinymce",
+
     "todo_app",
     "sevo_user"
 ]
@@ -133,3 +135,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # SEVO USER
 SEVO_USER_SIGN_IN_REDIRECT_URL = "todo_app:todo_index"
+
+
+
+
+
+
+# tinymce
+TINYMCE_DEFAULT_CONFIG = {
+    "theme": "silver",
+    "height": 500,
+    "menubar": False,
+    "plugins": "advlist,autolink,lists,link,image,charmap,preview,anchor,searchreplace,visualblocks,fullscreen,insertdatetime,media,table,code,help,wordcount,emoticons",
+    "toolbar": "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | image link table | code fullscreen visualblocks preview emoticons",
+}
+

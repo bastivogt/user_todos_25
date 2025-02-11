@@ -2,21 +2,13 @@
 
 <div class="card my-4">
     <div class="card-header">
-        {{ title }}
-        <div class="meta-data">
-            <small>
-                {% trans "Created" %}: <time datetime="{{ todo.created }}">{{ todo.created }}</time>
-            </small>
-            <br>
-            <small>
-                {% trans "Updated" %}: <time datetime="{{ todo.updated }}">{{ todo.updated }}</time>
-            </small>
-        </div>    
+        {{ todo.title }}
+
 
     </div>
     <div class="card-body">
         {% autoescape off %}
-            {{ todo.content }}
+            {{ todo.content|truncatewords_html:50 }}
         {% endautoescape %}
     </div>
     <div class="card-footer">
