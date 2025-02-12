@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% if todo_list %}
+    {% for todo in todo_list %}
+        {% include "./_todo-item-category.html" with list=True detail=True update=True delete=True done=True %}
+    {% endfor %}
+{% else %}
+    <p>{% trans "No Todos available." %}</p>
+{% endif %}

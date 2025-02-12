@@ -15,6 +15,7 @@ urlpatterns = [
     path("todo/switch/done/single/<int:pk>/", views.todo_switch_done_single, name="todo_switch_done_single"),
 
 
+
     path("categories/", views.CategoryListView.as_view(), name="category_index"),
     
     path("category/<int:pk>/", views.CategoryDetailView.as_view(), name="category_detail"),

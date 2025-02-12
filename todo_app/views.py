@@ -44,7 +44,7 @@ class CategoryDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         todos = self.get_object().todos.all().filter(user=self.request.user)
-        # print(todos)
+
         ctx.update({
             "title": self.get_object().name,
             "todos": todos
@@ -252,6 +252,9 @@ def todo_switch_done_single(request, pk):
         "title": todo.title,
         "meta_data": True
     })
+
+
+
 
     
 

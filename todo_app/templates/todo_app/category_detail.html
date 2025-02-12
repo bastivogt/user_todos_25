@@ -4,24 +4,28 @@
 
 
 {% block title %}
-<strong>
     {{ object.name }}
-</strong>
+{% endblock %}
+
+{% block header %}
+    {% include "./partials/_heading.html" with title=object.name %}
 {% endblock %}
 
 
 {% block content %}
-    <div>
-        <ul>
+    <div id="todo-list" class="mb-5">
+        {% if todos %}
             {% for todo in todos %}
-                <li>
-                    <a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a>
-                </li>
+                {% include "./partials/_todo-item-category.html" with list=True detail=True update=True delete=True %}
             {% endfor %}
-        </ul>
+        {% else %}
+            <p>
+                No Todos available.
+            </p>
+        {% endif %}
     </div>
     <div>
-        <a href="{% url "todo_app:category_index" %}">{% trans "Back to Categories" %}</a>
+        {% include "./partials/_category-back.html" %}
     </div>
 
 {% endblock %}

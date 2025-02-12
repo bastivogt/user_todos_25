@@ -33,6 +33,7 @@
                         <td class="d-lg-table-cell d-none" >{{ category.updated }}</td>
                         <td>
                             <div class="d-flex gap-1 justify-content-end">
+                                <a class="btn btn-primary btn-sm" href="{{ category.get_absolute_url }}">{% trans "Show" %}</a>
                                 <a class="btn btn-success btn-sm" href="{% url "todo_app:category_update" pk=category.pk %}">{% trans "Edit" %}</a>
                                 <a class="btn btn-danger btn-sm" href="{% url "todo_app:category_delete" pk=category.pk %}">{% trans "Delete" %}</a>
                             </div>
