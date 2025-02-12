@@ -236,7 +236,8 @@ def todo_switch_done_list(request, pk):
         todo.done = not todo.done
         todo.save()
     return render(request, "todo_app/partials/_todo-list.html", {
-        "todo_list": Todo.objects.filter(user=request.user)
+        "todo_list": Todo.objects.filter(user=request.user),
+        "meta_data": False
     })
 
 
@@ -247,7 +248,9 @@ def todo_switch_done_single(request, pk):
         todo.done = not todo.done
         todo.save()
     return render(request, "todo_app/partials/_todo-item-detail.html", {
-        "todo": todo
+        "todo": todo,
+        "title": todo.title,
+        "meta_data": True
     })
 
     

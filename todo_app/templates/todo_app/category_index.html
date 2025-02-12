@@ -7,28 +7,40 @@
     {{ title }}
 {% endblock %}
 
+{% block header %}
+    {% include "./partials/_heading.html" with title=title %}
+{% endblock %}
+
 
 {% block content %}
-    <h1>{% trans "Categories" %}</h1>
-    <div>
-        <a href="{% url "todo_app:category_create" %}">{% trans "New Category" %}</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">{% trans "Name" %}</th>
+                <th class="d-lg-table-cell d-none" scope="col">{% trans "Created" %}</th>
+                <th class="d-lg-table-cell d-none" scope="col">{% trans "Updated" %}</th>
+                <th class="text-end" scope="col">{% trans "Actions" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for category in category_list %}
+                    <tr>
+                        <th scope="row">{{ category.id }}</th>
+                        <td><strong>{{ category.name }}</strong></td>
+                        <td class="d-lg-table-cell d-none" >{{ category.created }}</td>
+                        <td class="d-lg-table-cell d-none" >{{ category.updated }}</td>
+                        <td>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a class="btn btn-success btn-sm" href="{% url "todo_app:category_update" pk=category.pk %}">{% trans "Edit" %}</a>
+                                <a class="btn btn-danger btn-sm" href="{% url "todo_app:category_delete" pk=category.pk %}">{% trans "Delete" %}</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
     </div>
-    <div>
-        {% if category_list %}
-        <ul>
-            {% for category in category_list %}
-                <li>
-                    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                    <a href="{% url "todo_app:category_update" pk=category.pk %}">[{% trans "Update" %}]</a>
-                    <a href="{% url "todo_app:category_delete" pk=category.pk %}">[{% trans "Delete" %}]</a>
-                </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>{% trans "No Categories available." %}</p>
-        {% endif %}
-    </div>
-    <div>
-        <a href="{% url "todo_app:todo_index" %}">{% trans "All Todos" %}</a>
-    </div>
+
 {% endblock %}

@@ -21,7 +21,9 @@
         {% csrf_token %}
         <div class="card">
             <div class="card-header">
-                {{ title }}
+                <strong>
+                    {{ title }}
+                </strong>
                 {% if meta_data %}
                     <div class="meta-data">
                         <small>
@@ -53,14 +55,15 @@
                 {% endfor %}
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">{% trans "Submit" %}</button>
+                <div class="d-flex gap-1">
+                    <button class="btn btn-primary">{% trans "Submit" %}</button>
+                    {% include "./partials/_todo-back.html" %}
+                </div>
             </div>
         </div>
 
     </form>
     <div class="mt-5">
-        {% include "./partials/_todo-back.html" %}
-    </div>
 
 
 

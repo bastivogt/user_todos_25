@@ -2,7 +2,9 @@
 
 <div class="card my-4">
     <div class="card-header">
-        {{ title }}
+        <strong>
+            {{ title }}
+        </strong>
         {% if meta_data %}
             <div class="meta-data">
                 <small>
@@ -22,16 +24,17 @@
     </div>
     <div class="card-footer">
         <div class="d-flex gap-3 justify-content-between align-items-center flex-column flex-md-row gap-md-1">
-            <div class="d-flex align-items-center gap-1">
+            <div class="d-flex align-items-center gap-1 flex-md-row flex-column">
                 {% if detail %}
-                    <a class="btn btn-primary btn-sm" href="{{ todo.get_absolute_url }}">{% trans "Show" %}</a>
+                    <a class="btn btn-primary" href="{{ todo.get_absolute_url }}">{% trans "Show" %}</a>
                 {% endif %}
                 {% if update %}
-                    <a class="btn btn-success btn-sm" href="{% url "todo_app:todo_update" pk=todo.pk %}">{% trans "Edit" %}</a>
+                    <a class="btn btn-success" href="{% url "todo_app:todo_update" pk=todo.pk %}">{% trans "Edit" %}</a>
                 {% endif %}
                 {% if delete %}
-                    <a class="btn btn-danger btn-sm" href="{% url "todo_app:todo_delete" pk=todo.pk %}">{% trans "Delete" %}</a>
+                    <a class="btn btn-danger" href="{% url "todo_app:todo_delete" pk=todo.pk %}">{% trans "Delete" %}</a>
                 {% endif %}
+                {% include "./_todo-back.html" %}
             </div>
 
             <div>

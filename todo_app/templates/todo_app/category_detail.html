@@ -4,7 +4,9 @@
 
 
 {% block title %}
+<strong>
     {{ object.name }}
+</strong>
 {% endblock %}
 
 
@@ -19,7 +21,7 @@
         </ul>
     </div>
     <div>
-        <a href="{% url "todo_app:category_index" %}">Back to Categories</a>
+        <a href="{% url "todo_app:category_index" %}">{% trans "Back to Categories" %}</a>
     </div>
 
 {% endblock %}

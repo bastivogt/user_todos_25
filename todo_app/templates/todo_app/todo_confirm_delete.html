@@ -9,15 +9,28 @@
 
 
 {% block content %}
+    <h1 class="mb-5 text-danger">{% trans "Do you really want to delete this Todo?" %}</h1>
     <div>
         <form  method="post">
             {% csrf_token %}
-            <p>{% trans "Do you really want to delete: " %}<b>#{{ object.pk }} {{object }}</b>?</p>
-            <button>{% trans "Delete" %}</button>
+            <div class="card border-danger">
+                <div class="card-header border-danger bg-danger text-white">
+                    <strong>{{ todo.title }}</strong>
+                </div>
+                <div class="card-body">
+                    {% autoescape off %}
+                        {{ todo.content }}
+                    {% endautoescape %}    
+                </div>
+                <div class="card-footer border-danger bg-white">
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-danger">{% trans "Delete" %}</button>
+                        <a class="btn btn-secondary" href="{% url "todo_app:todo_index" %}">{% trans "Cancel" %}</a>
+                    </div>
+                </div>
+            </div>  
         </form>
     </div>
-    <div>
-        <a href="{% url "todo_app:category_index" %}">{% trans "Back to Categories" %}</a>
-    </div>
+
 
 {% endblock %}
