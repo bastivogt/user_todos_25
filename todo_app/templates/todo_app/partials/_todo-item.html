@@ -35,6 +35,7 @@
                     <a class="btn btn-danger" href="{% url "todo_app:todo_delete" pk=todo.pk %}">{% trans "Delete" %}</a>
                 {% endif %}
                 {% include "./_todo-back.html" %}
+                {% include "./_category-back.html" %}
             </div>
 
             <div>
