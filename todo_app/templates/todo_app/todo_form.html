@@ -57,14 +57,18 @@
             <div class="card-footer">
                 <div class="d-flex gap-1">
                     <button class="btn btn-primary">{% trans "Submit" %}</button>
-                    {% include "./partials/_todo-back.html" %}
+                    {% comment %} {% include "./partials/_todo-back.html" %}
                     {% include "./partials/_category-back.html" %}
+                    {% include "./partials/_back-link.html" %} {% endcomment %}
                 </div>
             </div>
         </div>
 
     </form>
-    <div class="mt-5">
+    <div class="mt-3">
+        {% include "./partials/_back-link-meta.html" %}
+
+    </div>
 
 
 
